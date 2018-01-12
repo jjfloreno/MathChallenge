@@ -21,13 +21,13 @@ namespace MathChallenge
             {
                 Console.WriteLine("Hello! Please enter two numbers of equal length in digits.");
 
-                if (int.TryParse(Console.ReadLine(), out number1))
+                if (int.TryParse(Console.ReadLine(), out number1) && number1 > 0)
                 {
                     //count digits in number1 after user input is assigned to number1
                     count1 = DigitCount(number1, 0);
                     Console.WriteLine("First number = " + number1 + ". Please enter the second number:");
 
-                    if (int.TryParse(Console.ReadLine(), out number2))
+                    if (int.TryParse(Console.ReadLine(), out number2) && number2 > 0)
                     {
                         //count digits in number2 after user input is assigned to number2
                         count2 = DigitCount(number2, 0);
@@ -62,7 +62,17 @@ namespace MathChallenge
                     }
                     else
                     {
-                        letsGo = false;
+                        Console.WriteLine("Not a valid input. Would you like to start over? <Y or N>");
+                        doAgain = Convert.ToChar(Console.ReadLine());
+
+                        if (doAgain == 'Y' || doAgain == 'y')
+                        {
+                            letsGo = true;
+                        }
+                        else
+                        {
+                            letsGo = false;
+                        }
                     }
                 }
                 else
@@ -115,22 +125,18 @@ namespace MathChallenge
         //create a new array with the sum of each integer in a & b, output in the corresponding position
         //then will use a bool to determine if the array has all the same values (true) or not (false)
         {
-            bool allEqual;
-
+            //array c will contain the totals of a + b by zipping the arrays together while keeping each value separate
             int[]c = a.Zip(b, (x, y) => x + y).ToArray();
-
-            //if the number of distinct values in array c are not equal to the total number of values,
-            //that means each position did not sum to the same value. based on that, if statement will
-            //tell the console what to write from the result.
-            allEqual = c.Distinct().Count() != c.Count();
-
-            if (allEqual == true)
+ 
+            //if new array c has more than 1 unique value, it will print false. 
+            if (c.Distinct().Count() > 1)
+  
             {
-                Console.WriteLine("True!");
+                Console.WriteLine("False!");
             }
             else
             {
-                Console.WriteLine("False!");
+                Console.WriteLine("True!");
             }
         }
     }
