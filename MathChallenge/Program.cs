@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//Deliverable 1 by John Floreno
+
 namespace MathChallenge
 {
     class Program
